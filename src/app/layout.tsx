@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Playfair_Display } from 'next/font/google';
+import { Providers } from "./providers";
 import "@/styles/globals.css";
+import ThemeSwitcher from "@/components/basic/themeSwitcher";
 
 const playFairDisplay = Playfair_Display({
   subsets: ['latin'],
@@ -19,11 +21,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR">
-      <body
-        className={`${playFairDisplay.variable} antialiased`}
-      >
-        {children}
+    <html lang="pt-BR" suppressHydrationWarning>
+      <body className={`${playFairDisplay.variable} antialiased`}>
+        <Providers>
+          <main>
+            <ThemeSwitcher />
+            {children}
+          </main>
+        </Providers>
       </body>
     </html>
   );
